@@ -1,0 +1,12 @@
+
+.allTargets {
+    display: flex;
+    flex-direction: column;
+    
+    }
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
