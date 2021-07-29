@@ -1,9 +1,11 @@
 
-.allTargets {
-    display: flex;
-    flex-direction: column;
+.game {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3,1fr);
+        margin:auto
+      }
     
-    }
 
 body {
     display: flex;
