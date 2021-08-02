@@ -1,10 +1,12 @@
 //grabbing what i need using query selector
 let targets = document.querySelector(".bullsEye")
 let game = document.querySelector(".game")
-let start = document.querySelector(".start")
+let startButton = document.querySelector("#start")
 let score = document.querySelector(".score")
 let front = document.querySelector(".front")
 let back = document.querySelectorAll(".back")
+let card = document.querySelector(".card")
+let inner = document.querySelectorAll(".inner")
 let vanDamme = document.createElement("img")
 let hostage = document.createElement("img", src="https://ak.picdn.net/shutterstock/videos/1021295671/thumb/11.jpg" )
 //okay now i want to the divs to flip/change to from one side to the other individually
@@ -18,27 +20,34 @@ let hostage = document.createElement("img", src="https://ak.picdn.net/shuttersto
 
 //here i have tested to append child.. it works... now i have to get it to append to a random div.
 //i also have to make that random div flip at a certain speed2
-// function randomize(back) {
-  
-//   }
-  
-function getRandomArbitrary(min, max) {
-    return Math.floor(Math.random()) * (9 - 0) + 0;
-   
-  }
-  console.log(getRandomArbitrary())
-//   randomize(back);
-  console.log(back);
-for (let i = 0; i < Math.floor(Math.random() * 9); i++) {
-    
+
+
+// so this for loop randomly itterates through the array so vandame appears in different spots every time screen refreshes
+//but i want it to autamtically switch van damme so i think i need to create a function
+function start(){
+    for (let i = 0; i < Math.floor(Math.random() * 9); i++) {
+        let j = Math.floor(Math.random() * 9)
+        inner[j].style = "transform: rotateY(180deg)";
+    }    
+    // this loop is for generating a random ammount of hostages
+    for (let i = 0; i < Math.floor(Math.random() * 9); i++) {
+        let j = Math.floor(Math.random() * 9)
+        inner[j].style = "transform: rotateY(180deg)";
+    }    
+
+    //this is so vandamme can go into random places
+    let i = Math.floor(Math.random() * 9)
     vanDamme.src = "https://i5.walmartimages.com/asr/8ed88348-fd7f-492b-9ad9-640d392fdac1_1.1bc02bb917b325271cc8593cfeda29b6.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff";
     vanDamme.style = "width:300px; height:300px";
-   
     let test = back[i].appendChild(vanDamme)
+    inner[i].style = "transform: rotateY(180deg)";
     console.log(test)
 
 }
 
+
+
+// startButton.addEventListener("onclick", start())
 
 
 
