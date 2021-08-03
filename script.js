@@ -14,6 +14,11 @@ let bossHealth = 1000;
 let yourHealth = 200;
 bossHp.innerHTML = bossHealth
 playerHp.innerHTML = yourHealth
+//this sets the speed of the game/ how fast the cards flip
+let timerCd = 1500; 
+let timer;
+//keep track of the previous round/flip so we can get you to lose health if you dont shoot vandamme
+let lastHealth = 0;
 //okay now i want to the divs to flip/change to from one side to the other individually
 //just found how to creat flip card in w3schools https://www.w3schools.com/howto/howto_css_flip_card.asp
 // <button class= "start">Start!</button>
@@ -29,33 +34,50 @@ playerHp.innerHTML = yourHealth
 //but i want it to autamtically switch van damme so i think i need to create a function
 //need to get the cards to refresh
 
-// this is to activate all at the same time
+//this starts the game when you click the start button and refreshes the card ever second inna half
+function startGame() {
+    timer = setInterval(start, timerCd) 
+}
+// this is the actual start to the game that the function above calls
 function start() {
   let inner = document.querySelectorAll(".inner");
+  //refreshes the health on the screen every time it goes down for each player
+  bossHp.innerHTML = bossHealth
+playerHp.innerHTML = yourHealth
+// putting these variables in scope
   let back = document.querySelectorAll(".back");
 let card = document.querySelectorAll(".card");
-  //stop points from registering on a spam click
-  var wasClicked = false
+//this is for if you dont shoot van damme, van damme will shoot you
+  if (bossHealth == lastHealth) {
+      yourHealth-=10
+  }
+  lastHealth = bossHealth
   // this loop is for resetting the board
   for (let i = 0; i < inner.length; i++) {
     if (inner[i].dataset.activemode != "Front") {
       inner[i].dataset.activemode = "Front";
       inner[i].style = "transform: rotateY(0deg)";
     }
-    //resets the point back 0
-    back[i].dataset.points = "0";
+    //resets the point back -10
+    back[i].dataset.points = "-10";
+    //this is to track which card got clicked so that when it gets clicked it calls the calculatePoints function
+    card[i].setAttribute("onclick","calculatePoints(" + back[i].dataset.points + ", 'none')"
+    );
+    
   }
   // this loop is for generating a random ammount of hostages
   let numHostages = Math.floor(Math.random() * 9)
-
+//these 2 loops generate random number of hostages and a random location of the hostages
   let hostageLocation = 0
   for (let i = 0; i < numHostages; i++) {
     do {
         hostageLocation = Math.floor(Math.random() * 9);
-    } while (back[hostageLocation].dataset.points == "-10")
-
+    } while (inner[hostageLocation].dataset.activemode == "back")
+//this line is to show whether the card was flipped over or not
     inner[hostageLocation].dataset.activemode = "back";
+    //this flips the card over live
     inner[hostageLocation].style = "transform: rotateY(180deg)";
+    //shows hostage hit points or how much points you lose for hitting a hostage
     back[hostageLocation].dataset.points = "-10";
     //calculating point for hostages by adding an onclick attribute
     card[hostageLocation].setAttribute("onclick","calculatePoints(" + back[hostageLocation].dataset.points + ", 'hostage')"
@@ -68,30 +90,49 @@ let card = document.querySelectorAll(".card");
   vanDamme.style = "width:300px; height:300px";
   let test = back[i].appendChild(vanDamme);
   inner[i].style = "transform: rotateY(180deg)";
-  //this changed activemode(located in html) after flipping the card
+//this line is to show whether the card was flipped over or not
   inner[i].dataset.activemode = "back";
   back[i].dataset.points = "-20";
-  
+
+   //calculating point for van Damme by adding an onclick attribute
   card[i].setAttribute(
     "onclick",
     "calculatePoints(" + back[i].dataset.points + ", 'vanDamme')"
   );
-  console.log(test);
+  
 }
 //this calculate points lol
 function calculatePoints(numPoints, cardClicked) {
-   console.log(cardClicked)
-  //did parse int to see through the string and convert it to number -10
+   
+  //this determines who gets thier health taken
 if (cardClicked == 'vanDamme') {
   bossHealth += parseInt(numPoints);
-} else if (cardClicked == 'hostage') {
+} else if (cardClicked == 'hostage' || cardClicked == 'none') {
     yourHealth += parseInt(numPoints);
   }
+  //prevents the health from going below 0
+  if (bossHealth <= 0) {
+  bossHealth = 0
+}
+ if (yourHealth <= 0) {
+    yourHealth = 0
+}
+//refreshes the health on the screen every time it goes down for each player for after the button 
+//is click to update the point or after someone gets shot
   bossHp.innerHTML = bossHealth
   playerHp.innerHTML = yourHealth
- 
+ gameOver()
 }
-
+//this decides whether the game is over or not!
+function gameOver() {
+    if (bossHealth == 0) {
+        clearInterval(timer)
+        console.log("Player Win!")
+    }else if (yourHealth == 0) {
+        clearInterval(timer)
+        console.log("Player Lose!")
+    }
+}
   
 
 // startButton.addEventListener("onclick", start())
