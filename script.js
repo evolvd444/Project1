@@ -2,13 +2,18 @@
 let targets = document.querySelector(".bullsEye");
 let game = document.querySelector(".game");
 let startButton = document.querySelector("#start");
-let score = document.querySelector(".score");
+let bossHp = document.querySelector(".bossHealth");
+let playerHp = document.querySelector(".yourHealth");
 let front = document.querySelector(".front");
 let back = document.querySelectorAll(".back");
-let card = document.querySelector(".card");
+let card = document.querySelectorAll(".card");
 let inner = document.querySelectorAll(".inner");
 let vanDamme = document.createElement("img");
 let hostage = document.createElement("img");
+let bossHealth = 1000;
+let yourHealth = 200;
+bossHp.innerHTML = bossHealth
+playerHp.innerHTML = yourHealth
 //okay now i want to the divs to flip/change to from one side to the other individually
 //just found how to creat flip card in w3schools https://www.w3schools.com/howto/howto_css_flip_card.asp
 // <button class= "start">Start!</button>
@@ -25,54 +30,70 @@ let hostage = document.createElement("img");
 //need to get the cards to refresh
 
 // this is to activate all at the same time
-function play() {
+function start() {
   let inner = document.querySelectorAll(".inner");
+  let back = document.querySelectorAll(".back");
+let card = document.querySelectorAll(".card");
+  //stop points from registering on a spam click
+  var wasClicked = false
   // this loop is for resetting the board
   for (let i = 0; i < inner.length; i++) {
     if (inner[i].dataset.activemode != "Front") {
       inner[i].dataset.activemode = "Front";
       inner[i].style = "transform: rotateY(0deg)";
     }
-    //resets the point back -10
+    //resets the point back 0
     back[i].dataset.points = "0";
   }
   // this loop is for generating a random ammount of hostages
-  for (let i = 0; i < Math.floor(Math.random() * 9); i++) {
-    let j = Math.floor(Math.random() * 9);
+  let numHostages = Math.floor(Math.random() * 9)
 
-    inner[j].dataset.activemode = "back";
-    inner[j].style = "transform: rotateY(180deg)";
-    back[i].dataset.points = "-10";
-    card[i].setAttribute(
-      "onclick",
-      "calculatePoints(" + back[i].dataset.points + ")"
+  let hostageLocation = 0
+  for (let i = 0; i < numHostages; i++) {
+    do {
+        hostageLocation = Math.floor(Math.random() * 9);
+    } while (back[hostageLocation].dataset.points == "-10")
+
+    inner[hostageLocation].dataset.activemode = "back";
+    inner[hostageLocation].style = "transform: rotateY(180deg)";
+    back[hostageLocation].dataset.points = "-10";
+    //calculating point for hostages by adding an onclick attribute
+    card[hostageLocation].setAttribute("onclick","calculatePoints(" + back[hostageLocation].dataset.points + ", 'hostage')"
     );
   }
 
   //this is so vandamme can go into random places
   let i = Math.floor(Math.random() * 9);
-  vanDamme.src =
-    "https://i5.walmartimages.com/asr/8ed88348-fd7f-492b-9ad9-640d392fdac1_1.1bc02bb917b325271cc8593cfeda29b6.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff";
+  vanDamme.src ="https://i5.walmartimages.com/asr/8ed88348-fd7f-492b-9ad9-640d392fdac1_1.1bc02bb917b325271cc8593cfeda29b6.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff";
   vanDamme.style = "width:300px; height:300px";
   let test = back[i].appendChild(vanDamme);
   inner[i].style = "transform: rotateY(180deg)";
   //this changed activemode(located in html) after flipping the card
   inner[i].dataset.activemode = "back";
-  back[i].dataset.points = "5";
+  back[i].dataset.points = "-20";
+  
   card[i].setAttribute(
     "onclick",
-    "calculatePoints(" + back[i].dataset.points + ")"
+    "calculatePoints(" + back[i].dataset.points + ", 'vanDamme')"
   );
   console.log(test);
 }
 //this calculate points lol
-function calculatePoints(numPoints) {
+function calculatePoints(numPoints, cardClicked) {
+   console.log(cardClicked)
   //did parse int to see through the string and convert it to number -10
-  points += parseInt(numPoints);
+if (cardClicked == 'vanDamme') {
+  bossHealth += parseInt(numPoints);
+} else if (cardClicked == 'hostage') {
+    yourHealth += parseInt(numPoints);
+  }
+  bossHp.innerHTML = bossHealth
+  playerHp.innerHTML = yourHealth
+ 
 }
-function start() {
-  let points = 0;
-}
+
+  
+
 // startButton.addEventListener("onclick", start())
 
 //<div class="flip-card">

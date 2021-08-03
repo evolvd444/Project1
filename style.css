@@ -1,4 +1,8 @@
 
+
+h1 {
+  position: center;
+}
 .game {
         display: grid;
         gap: 1rem;
@@ -8,6 +12,9 @@
     
 
 body {
+  background-image: url("https://www.tripsavvy.com/thmb/9ysyWV6PbF3OFOVm2u-ALdpJ7dg=/2896x1629/smart/filters:no_upscale()/landscape-129256055-590899c05f9b5864702e44d0.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
     display: flex;
     justify-content: center;
 }
@@ -41,13 +48,13 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden; 
   backface-visibility: hidden;
 }
 
 /* Style the front side (fallback if image is missing) */
 .front {
-  background-color: #bbb;
+  background-color: rgb(25, 202, 179);
   color: black;
 }
 
