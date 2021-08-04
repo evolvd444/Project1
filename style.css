@@ -1,13 +1,160 @@
-
-
-h1 {
-  position: center;
+#health {
+  font-family: 'Crimson Text', serif;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
+.health {
+  border-radius: 1rem;
+  background-color: aquamarine;
+  border: 2px solid blueviolet;
+}
+/* Author: Blade Multimedia;
+Coded in: HTML, CSS; */
+HTML CSSResult Skip Results Iframe
+EDIT ON
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Crimson Text', serif;
+}
+
+a {
+  border-radius: 7px;
+  border: 3px outset #888;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #eee;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  overflow: hidden;
+  
+  box-shadow: 0 0 10px rgb(0, 0, 0, 1);
+  font-family:'Crimson Text', serif;
+  font-size: 28px;
+  font-weight: bolder;
+  text-decoration: none;
+  background:linear-gradient(160deg, #666, rgb(166, 207, 223));
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+
+  transition: 0.2s;
+
+}
+a:active {
+  border: 3px outset rgb(221, 221, 221);
+  color: #fff;
+  background: linear-gradient(160deg, #666, #444);
+  text-shadow: 0px 0px 4px #ccc;
+  box-shadow: 0 0 10px #fff, 0 0 40px #fff, 0 0 80px #fff;
+  transition-delay: 1s;
+}
+
+a span {
+  position: absolute;
+  display: block;
+}
+
+a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #eee);
+}
+a:active span:nth-child(1) {
+  left: 100%;
+  transition: 1s;
+}
+a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #eee);
+}
+a:active span:nth-child(2) {
+  top: 100%;
+  transition: 1s;
+  transition-delay: 0.25s;
+}
+a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #eee);
+}
+a:active span:nth-child(3) {
+  right: 100%;
+  transition: 1s;
+  transition-delay: 0.5s;
+}
+
+a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #eee);
+}
+a:active span:nth-child(4) {
+  bottom: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
+}
+/* Author: Blade Multimedia;
+Coded in: HTML, CSS; */
+/* https://webdeasy.de/en/top-css-buttons-en/ */
+.theModal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+.health {
+  text-align: center;
+}
+
+.theRules {
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
+}
+
+
+.close {
+  color: rgb(3, 0, 0);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(195, 4, 4);
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .game {
         display: grid;
         gap: 1rem;
         grid-template-columns: repeat(3,1fr);
-        margin:auto
+        margin-bottom: 0;
       }
     
 
@@ -17,6 +164,7 @@ body {
   background-repeat: no-repeat;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .card {
@@ -24,10 +172,10 @@ body {
   width: 300px;
   height: 200px;
   border: 1px solid #f1f1f1;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  perspective: 1000px; 
 }
 
-/* This container is needed to position the front and back side */
+
 .inner {
   position: relative;
   width: 100%;
@@ -37,13 +185,13 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+
 .card:hover .inner {
   transform: rotateY(180deg)
 }
   
 
-/* Position the front and back side */
+
 .front, .back {
   position: absolute;
   width: 100%;
@@ -52,13 +200,13 @@ body {
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
+
 .front {
   background-color: rgb(25, 202, 179);
   color: black;
 }
 
-/* filling in empty backside with an image of a hostage */
+
 .back {
   background-image: url("https://ak.picdn.net/shutterstock/videos/1021295671/thumb/11.jpg");
   background-size: 400px;

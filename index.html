@@ -6,17 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1>Van Damme Health! <span class="bossHealth">0</span></h1>
-    <h1>Your Health  <span class="yourHealth">0</span></h1>
+  <div id="health"> 
+    <h1 class= "health">Van Damme Health : <span class="bossHealth">0</span></h1>
+    <h1 class=  "health">Your Health :  <span class="yourHealth">0</span></h1>
+
+  </div>
+
 
     
+    <a href="#" id="rules">The Rules!
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+
+    <div id="rulesModal" class="theModal">
     
+    
+      <div class="theRules">
+        <span class="close">&times;</span>
+        <p>The rules are simple. Kill Van Damme before he kills you. If you miss he will shoot you and you will lose 10hp. If you hit him before he flips back, he will lose 20hp</p>
+      </div>
+    </div>
     <div class="allTargets">
      
-      <button id="start" onclick="startGame()">Start</button>
-
+     
+      
+        <a href="#" id="start" onclick="startGame()">Begin!
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      
     <div class="game">
   
       <div class="card">
@@ -144,10 +172,23 @@
     </div>
   </div>
 </div>
-
-
-
+ <!-- https://codepen.io/tpavard/pen/xLXKOB -->
+ <span>Hover me</span>
+ <svg xmlns="http://www.w3.org/2000/svg" 
+      xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMinYMin slice" class="hidden" id="svgContainer">
+   <filter id="liquify">
+     <feGaussianBlur in="SourceGraphic" 
+                     stdDeviation="20" 
+                     result="blur" />
+     <feColorMatrix in="blur" 
+                    type="matrix"
+                    values=".15 0 0 0 0,  0 0 0 0 0,  0 0 0 0 0,  0 0 0 100 -20"/>
+   </filter>
+   <g filter="url(#liquify)">
+   </g>
+ </svg>
 </div>
+
     <script src="script.js"></script>
   </body>
 </html>

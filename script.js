@@ -14,6 +14,31 @@ let bossHealth = 1000;
 let yourHealth = 200;
 bossHp.innerHTML = bossHealth
 playerHp.innerHTML = yourHealth
+// Get the modal
+let modal = document.querySelector(".theModal");
+
+// Get the button that opens the modal
+var btn = document.querySelector("#rules");
+
+// Get the <span> element that closes the modal
+var span = document.querySelector(".close");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 //this sets the speed of the game/ how fast the cards flip
 let timerCd = 1500; 
 let timer;
