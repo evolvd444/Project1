@@ -59,7 +59,7 @@ let lastHealth = 0;
 // so this for loop randomly itterates through the array so vandame appears in different spots every time screen refreshes
 //but i want it to autamtically switch van damme so i think i need to create a function
 //need to get the cards to refresh
-var audio = new Audio("GunShotSnglShotIn PE1097906.mp3");
+var audio = new Audio("AK47.mp3");
 
 document.onclick = function() {
   audio.play();
