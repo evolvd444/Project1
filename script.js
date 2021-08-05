@@ -12,23 +12,24 @@ let vanDamme = document.createElement("img");
 let hostage = document.createElement("img");
 let bossHealth = 1000;
 let yourHealth = 200;
+let modal = document.querySelector(".theModal");
 bossHp.innerHTML = bossHealth
 playerHp.innerHTML = yourHealth
-// Get the modal
-let modal = document.querySelector(".theModal");
+
+
 
 // Get the button that opens the modal
-var btn = document.querySelector("#rules");
+let btn = document.querySelector("#rules");
 
 // Get the <span> element that closes the modal
-var span = document.querySelector(".close");
+let span = document.querySelector(".close");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+// When the user clicks on (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
 }
@@ -40,7 +41,7 @@ window.onclick = function(event) {
   }
 }
 //this sets the speed of the game/ how fast the cards flip
-let timerCd = 1500; 
+let timerCd = 1475; 
 let timer;
 //keep track of the previous round/flip so we can get you to lose health if you dont shoot vandamme
 let lastHealth = 0;
@@ -58,7 +59,11 @@ let lastHealth = 0;
 // so this for loop randomly itterates through the array so vandame appears in different spots every time screen refreshes
 //but i want it to autamtically switch van damme so i think i need to create a function
 //need to get the cards to refresh
+var audio = new Audio("GunShotSnglShotIn PE1097906.mp3");
 
+document.onclick = function() {
+  audio.play();
+}
 //this starts the game when you click the start button and refreshes the card ever second inna half
 function startGame() {
     timer = setInterval(start, timerCd) 
@@ -90,7 +95,7 @@ let card = document.querySelectorAll(".card");
     );
     
   }
-  // this loop is for generating a random ammount of hostages
+  // this is for generating a random ammount of hostages
   let numHostages = Math.floor(Math.random() * 9)
 //these 2 loops generate random number of hostages and a random location of the hostages
   let hostageLocation = 0
@@ -152,10 +157,10 @@ if (cardClicked == 'vanDamme') {
 function gameOver() {
     if (bossHealth == 0) {
         clearInterval(timer)
-        console.log("Player Win!")
+        alert("Player Win!")
     }else if (yourHealth == 0) {
         clearInterval(timer)
-        console.log("Player Lose!")
+        alert("Player Lose!")
     }
 }
   
